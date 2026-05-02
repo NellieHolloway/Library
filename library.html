@@ -2149,10 +2149,21 @@ function importJSON(file){
 let deferredInstallPrompt = null;
 const INSTALL_DISMISS_KEY = 'library.installDismissed';
 
-function registerServiceWorker(){
+async function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   // Service workers only work over http(s), not file://
   if(location.protocol === 'file:') return;
+
+  // Probe for sw.js before registering. When the HTML is viewed standalone
+  // (Claude artifact preview, single-file copy, etc.) without its supporting
+  // PWA files, we silently degrade to non-PWA mode rather than emit a noisy
+  // registration error.
+  try{
+    const probe = await fetch('sw.js', {method:'HEAD', cache:'no-store'});
+    if(!probe.ok) return;
+  }catch{
+    return;
+  }
 
   navigator.serviceWorker.register('sw.js').then(reg => {
     // When a new SW is found, show the update toast on activation
@@ -2166,9 +2177,7 @@ function registerServiceWorker(){
         }
       });
     });
-  }).catch(err => {
-    console.warn('SW registration failed:', err);
-  });
+  }).catch(() => {/* silent: degrade to non-PWA mode */});
 
   // Reload once when the new SW takes control
   let refreshing = false;
