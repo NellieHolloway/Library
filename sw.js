@@ -16,7 +16,7 @@ const RUNTIME_CACHE = `library-runtime-${VERSION}`;
 
 const SHELL = [
   './',
-  './library.html',
+  './index.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
@@ -119,7 +119,7 @@ async function cacheFirst(req, cacheName) {
   } catch (e) {
     // If we have an offline fallback for navigations, hand it back
     if (req.mode === 'navigate') {
-      const fallback = await caches.match('./library.html');
+      const fallback = await caches.match('./index.html');
       if (fallback) return fallback;
     }
     throw e;

@@ -8,7 +8,7 @@ lookup, and durable local storage. Installs as a real app, works offline.
 
 | File                          | What it is                                       |
 |-------------------------------|--------------------------------------------------|
-| `library.html`                | The app itself                                   |
+| `index.html`                  | The app itself                                   |
 | `manifest.webmanifest`        | PWA manifest — name, icons, display mode         |
 | `sw.js`                       | Service worker — offline caching                 |
 | `icon-192.png`                | Standard icon                                    |
@@ -18,18 +18,20 @@ lookup, and durable local storage. Installs as a real app, works offline.
 | `favicon.ico`                 | Browser tab icon (multi-size)                    |
 
 All eight files live in the same folder; relative paths are baked in.
+The README itself isn't part of the app.
 
 ## Deploy
 
 The app **must** be served over `http://` or `https://`. Service workers do
-not run from `file://`, so opening `library.html` directly will work as a
+not run from `file://`, so opening `index.html` directly will work as a
 plain web app but will **not** install or work offline.
 
 ### Recommended: GitHub Pages (matches Vinyl Vault setup)
 
 1. In your existing GitHub Pages repo, create a folder e.g. `library/`.
 2. Drop all eight files into that folder. Commit and push.
-3. Visit `https://<your-username>.github.io/<repo>/library/library.html`.
+3. Visit `https://<your-username>.github.io/<repo>/library/`.
+   GitHub Pages serves `index.html` automatically.
 4. Chrome / Edge / Brave: an install icon appears in the address bar.
    Safari iOS: tap Share → Add to Home Screen.
 
@@ -40,9 +42,9 @@ cd library/
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/library.html`. The install banner
-will appear. Some browsers require HTTPS for `beforeinstallprompt`;
-`localhost` is treated as secure, so this works.
+Then visit `http://localhost:8000/`. The install banner will appear.
+Some browsers require HTTPS for `beforeinstallprompt`; `localhost` is
+treated as secure, so this works.
 
 ## Once installed
 
@@ -67,7 +69,7 @@ Safari and Firefox fall back to the standard download flow.
 
 ## Updating
 
-To ship a new version after editing `library.html`:
+To ship a new version after editing `index.html`:
 
 1. Bump `VERSION` in `sw.js` (e.g. `'v1.0.0'` → `'v1.0.1'`).
 2. Commit & push.
