@@ -758,6 +758,242 @@ header{
 }
 .checkbox-row input{width:auto;margin:0;cursor:pointer;accent-color:var(--accent)}
 
+/* ========================================================
+   Stats view — analytics dashboard
+   ======================================================== */
+.stats-view{display:flex;flex-direction:column;gap:24px}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:24px;
+}
+.panel{
+  grid-column:span 12;
+  background:linear-gradient(180deg, rgba(34,28,19,0.4), rgba(19,17,13,0.6));
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:24px 28px;
+  position:relative;
+}
+.panel-6{grid-column:span 6}
+.panel-4{grid-column:span 4}
+.panel-8{grid-column:span 8}
+.panel-3{grid-column:span 3}
+@media (max-width: 980px){
+  .panel-6,.panel-4,.panel-8,.panel-3{grid-column:span 12}
+}
+.panel-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:18px;gap:14px;flex-wrap:wrap;
+}
+.panel-title{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--text-3);
+}
+.panel-sub{
+  font-family:var(--body);font-style:italic;font-size:13px;
+  color:var(--text-2);
+}
+
+/* Big numbers row */
+.metric-row{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+@media (max-width: 720px){
+  .metric-row{grid-template-columns:repeat(2, 1fr)}
+}
+.metric-cell{
+  padding:18px 22px;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:4px;
+}
+.metric-cell:last-child{border-right:none}
+@media (max-width: 720px){
+  .metric-cell:nth-child(2n){border-right:none}
+  .metric-cell:nth-child(-n+2){border-bottom:1px solid var(--border)}
+}
+.metric-num{
+  font-family:var(--display);font-weight:300;font-size:36px;
+  line-height:1;letter-spacing:-.02em;color:var(--text);
+  font-feature-settings:"tnum";
+}
+.metric-num em{font-style:normal;color:var(--accent)}
+.metric-num .unit{
+  font-family:var(--body);font-size:14px;font-style:italic;
+  color:var(--text-3);margin-left:6px;letter-spacing:0;
+}
+.metric-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-3);
+}
+.metric-delta{
+  font-family:var(--mono);font-size:10px;color:var(--text-2);
+  margin-top:2px;letter-spacing:.04em;
+}
+
+/* Heatmap */
+.heatmap-wrap{
+  overflow-x:auto;padding-bottom:8px;
+}
+.heatmap{
+  display:inline-block;
+}
+.heatmap-svg{display:block}
+.heatmap-cell{
+  shape-rendering:crispEdges;
+}
+.heatmap-month{
+  font-family:var(--mono);font-size:10px;
+  fill:var(--text-3);letter-spacing:.06em;
+}
+.heatmap-day{
+  font-family:var(--mono);font-size:9px;
+  fill:var(--text-3);letter-spacing:.04em;
+}
+.heatmap-legend{
+  display:flex;align-items:center;gap:8px;margin-top:14px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-3);
+}
+.heatmap-scale{display:flex;gap:3px}
+.heatmap-scale rect{shape-rendering:crispEdges}
+
+/* Bar charts */
+.barchart{display:block;width:100%;overflow:visible}
+.barchart-bar{transition:opacity .15s}
+.barchart-bar:hover{opacity:.85}
+.barchart-axis-label{
+  font-family:var(--mono);font-size:9px;
+  fill:var(--text-3);letter-spacing:.08em;
+}
+.barchart-value{
+  font-family:var(--mono);font-size:10px;
+  fill:var(--text-2);font-weight:500;
+}
+.barchart-grid{stroke:var(--border);stroke-width:1;shape-rendering:crispEdges}
+
+/* Donut chart */
+.donut{display:block}
+.donut-label{
+  font-family:var(--display);font-style:italic;
+  font-size:28px;font-weight:300;
+  fill:var(--text);text-anchor:middle;
+}
+.donut-sublabel{
+  font-family:var(--mono);font-size:9px;
+  fill:var(--text-3);letter-spacing:.16em;
+  text-anchor:middle;text-transform:uppercase;
+}
+.legend{
+  display:flex;flex-direction:column;gap:8px;margin-top:8px;
+}
+.legend-row{
+  display:grid;grid-template-columns:14px 1fr auto auto;
+  gap:10px;align-items:center;
+  font-size:13px;
+}
+.legend-swatch{
+  width:14px;height:14px;border-radius:2px;
+}
+.legend-name{color:var(--text)}
+.legend-count{
+  font-family:var(--mono);font-size:11px;color:var(--text-2);
+  font-feature-settings:"tnum";
+}
+.legend-pct{
+  font-family:var(--mono);font-size:11px;color:var(--text-3);
+  width:40px;text-align:right;font-feature-settings:"tnum";
+}
+
+/* Ranked list (top authors, etc) */
+.ranked{display:flex;flex-direction:column;gap:0}
+.ranked-row{
+  display:grid;grid-template-columns:24px 1fr auto;
+  gap:12px;align-items:center;
+  padding:9px 0;border-bottom:1px solid var(--border);
+}
+.ranked-row:last-child{border-bottom:none}
+.ranked-rank{
+  font-family:var(--mono);font-size:10px;color:var(--text-3);
+  letter-spacing:.06em;
+}
+.ranked-name{
+  font-family:var(--body);font-size:14px;color:var(--text);
+  display:flex;align-items:center;gap:10px;min-width:0;
+}
+.ranked-bar{
+  flex:1;min-width:30px;height:3px;background:var(--surface-2);
+  border-radius:2px;overflow:hidden;
+}
+.ranked-bar-fill{
+  height:100%;background:var(--accent);
+  border-radius:2px;
+}
+.ranked-name .ranked-text{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  flex-shrink:1;
+}
+.ranked-count{
+  font-family:var(--mono);font-size:11px;color:var(--text-2);
+  font-feature-settings:"tnum";min-width:24px;text-align:right;
+}
+
+/* Pace stats */
+.pace-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+  border:1px solid var(--border);border-radius:2px;
+  margin-bottom:16px;
+}
+.pace-cell{
+  padding:14px 16px;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:2px;
+}
+.pace-cell:last-child{border-right:none}
+.pace-num{
+  font-family:var(--display);font-size:22px;font-weight:300;
+  font-style:italic;color:var(--accent);
+  font-feature-settings:"tnum";
+}
+.pace-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-3);
+}
+
+/* In-progress list */
+.inprogress-list{
+  display:flex;flex-direction:column;gap:0;
+}
+.inprogress-row{
+  display:grid;grid-template-columns:1fr auto;
+  gap:14px;padding:8px 0;border-bottom:1px solid var(--border);
+  align-items:baseline;
+}
+.inprogress-row:last-child{border-bottom:none}
+.inprogress-title{
+  font-family:var(--body);font-size:14px;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.inprogress-meta{
+  font-family:var(--mono);font-size:10px;color:var(--text-3);
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.inprogress-meta.warm{color:var(--reading)}
+.inprogress-meta.cold{color:var(--text-3)}
+
+/* Empty state */
+.stats-empty{
+  text-align:center;padding:64px 24px;color:var(--text-3);
+}
+.stats-empty h2{
+  font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:32px;color:var(--text-2);margin-bottom:8px;
+}
+
 @media (max-width:720px){
   .app{padding:24px 16px 80px}
   header{flex-direction:column;align-items:flex-start;gap:16px}
@@ -841,6 +1077,7 @@ header{
         <div class="view-toggle">
           <button class="view-btn active" data-view="library">Library</button>
           <button class="view-btn" data-view="journal">Journal</button>
+          <button class="view-btn" data-view="stats">Stats</button>
         </div>
         <select class="sort-select" id="sortSelect">
           <option value="recent">Recently added</option>
@@ -857,6 +1094,7 @@ header{
 
   <div class="library" id="library"></div>
   <div class="journal" id="journal" style="display:none"></div>
+  <div class="stats-view" id="statsView" style="display:none"></div>
 </div>
 
 <!-- Add modal -->
@@ -1419,24 +1657,727 @@ function renderLibrary(){
 
 function renderAll(){
   renderStats();
-  if(state.view === 'library'){
-    document.getElementById('library').style.display = '';
-    document.getElementById('journal').style.display = 'none';
-    renderLibrary();
-  } else {
-    document.getElementById('library').style.display = 'none';
-    document.getElementById('journal').style.display = '';
-    renderJournal();
-  }
+  const lib = document.getElementById('library');
+  const jrn = document.getElementById('journal');
+  const sv  = document.getElementById('statsView');
+  lib.style.display = state.view === 'library' ? '' : 'none';
+  jrn.style.display = state.view === 'journal' ? '' : 'none';
+  sv.style.display  = state.view === 'stats'   ? '' : 'none';
+  if(state.view === 'library') renderLibrary();
+  else if(state.view === 'journal') renderJournal();
+  else if(state.view === 'stats') renderStatsView();
 }
 
 function setView(v){
   state.view = v;
   document.querySelectorAll('.view-btn').forEach(b =>
     b.classList.toggle('active', b.dataset.view === v));
-  // Sort menu and status filter behave differently in journal mode
+  // Sort/filter chrome only relevant in library
   document.getElementById('sortSelect').style.display = v === 'library' ? '' : 'none';
   renderAll();
+}
+
+/* ============================================================
+   STATS VIEW — analytics dashboard
+   ============================================================ */
+
+// Type → color map. Stable across panels for visual consistency.
+const TYPE_COLORS = {
+  'Book':        '#D4A574',
+  'Manga':       '#C66B5C',
+  'Light Novel': '#B58D4D',
+  'VN':          '#8DA8C7',
+  'Article':     '#9CB098',
+  'Other':       '#6E624F',
+};
+function colorForType(t){ return TYPE_COLORS[t] || TYPE_COLORS.Other; }
+
+function parseDate(iso){ return iso ? new Date(iso + 'T00:00:00') : null; }
+function dateKey(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function addDays(d, n){
+  const c = new Date(d); c.setDate(c.getDate()+n); return c;
+}
+
+function escapeAttr(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/**
+ * Compute every stat the view needs. Single pass through books/sessions
+ * where possible. Returns a structured object the renderer destructures.
+ */
+function computeAdvancedStats(){
+  const books = state.books;
+
+  // === Activity: dates -> session count ===
+  const sessionByDate = new Map(); // 'YYYY-MM-DD' -> count
+  const finishesByDate = new Map();
+  const dayOfWeek = [0,0,0,0,0,0,0]; // Sun..Sat
+
+  books.forEach(b => {
+    (b.sessions || []).forEach(s => {
+      if(!s.date) return;
+      sessionByDate.set(s.date, (sessionByDate.get(s.date) || 0) + 1);
+      const d = parseDate(s.date);
+      if(d && !isNaN(d)) dayOfWeek[d.getDay()]++;
+    });
+    if(b.dateFinished){
+      finishesByDate.set(b.dateFinished, (finishesByDate.get(b.dateFinished) || 0) + 1);
+    }
+  });
+
+  // === Streak calculations ===
+  const activeDates = new Set([
+    ...sessionByDate.keys(),
+    ...finishesByDate.keys()
+  ]);
+  // Build chronological list of streaks
+  const sortedDates = [...activeDates].sort();
+  const streaks = []; // {start, end, length}
+  let curStart = null, curLast = null;
+  sortedDates.forEach(ds => {
+    const d = parseDate(ds);
+    if(!curStart){
+      curStart = ds; curLast = d;
+      streaks.push({start: ds, end: ds, length: 1});
+    } else {
+      const gap = Math.round((d - curLast) / 86400000);
+      if(gap === 1){
+        const s = streaks[streaks.length - 1];
+        s.end = ds; s.length++;
+        curLast = d;
+      } else {
+        curStart = ds; curLast = d;
+        streaks.push({start: ds, end: ds, length: 1});
+      }
+    }
+  });
+  streaks.sort((a,b) => b.length - a.length);
+  const longestStreak = streaks[0]?.length || 0;
+  const topStreaks = streaks.slice(0, 5);
+
+  // Current streak: walk back from today
+  let currentStreak = 0;
+  let cursor = new Date();
+  if(!activeDates.has(dateKey(cursor))) cursor = addDays(cursor, -1);
+  while(activeDates.has(dateKey(cursor))){
+    currentStreak++;
+    cursor = addDays(cursor, -1);
+    if(currentStreak > 9999) break;
+  }
+
+  // === Library composition ===
+  const typeCount = {};
+  const statusCount = {want:0, reading:0, finished:0};
+  const decadeCount = {};
+  const authorCount = {};
+  const ratings = []; // numeric ratings only
+  const ratingHist = [0,0,0,0,0]; // index 0 = 1 star, etc.
+  let unrated = 0;
+  let pageCountFinished = 0; // numeric only
+
+  books.forEach(b => {
+    const t = b.type || 'Other';
+    typeCount[t] = (typeCount[t] || 0) + 1;
+    if(statusCount[b.status] != null) statusCount[b.status]++;
+    if(b.year){
+      const dec = Math.floor(b.year/10)*10;
+      decadeCount[dec] = (decadeCount[dec] || 0) + 1;
+    }
+    (b.authors || []).forEach(a => {
+      if(!a) return;
+      authorCount[a] = (authorCount[a] || 0) + 1;
+    });
+    if(typeof b.rating === 'number' && b.rating >= 1 && b.rating <= 5){
+      ratings.push(b.rating);
+      ratingHist[b.rating - 1]++;
+    } else if(b.status === 'finished') {
+      unrated++;
+    }
+    if(b.status === 'finished' && typeof b.pageCount === 'number'){
+      pageCountFinished += b.pageCount;
+    }
+  });
+
+  // === Pace: time-to-finish for finished books ===
+  const finishDurations = []; // days
+  const inProgress = []; // currently reading w/ days open
+  const today = new Date();
+  books.forEach(b => {
+    if(b.status === 'finished' && b.dateStarted && b.dateFinished){
+      const s = parseDate(b.dateStarted);
+      const f = parseDate(b.dateFinished);
+      if(s && f && f >= s){
+        const days = Math.round((f - s) / 86400000) + 1; // inclusive
+        finishDurations.push({book: b, days});
+      }
+    }
+    if(b.status === 'reading'){
+      const ref = b.dateStarted ? parseDate(b.dateStarted) : parseDate(b.dateAdded);
+      if(ref){
+        const days = Math.round((today - ref) / 86400000);
+        inProgress.push({book: b, days});
+      }
+    }
+  });
+  finishDurations.sort((a,b) => a.days - b.days);
+  inProgress.sort((a,b) => b.days - a.days);
+
+  const median = arr => {
+    if(arr.length === 0) return null;
+    const m = Math.floor(arr.length / 2);
+    return arr.length % 2 ? arr[m] : Math.round((arr[m-1] + arr[m]) / 2);
+  };
+  const fastest = finishDurations[0] || null;
+  const longest = finishDurations[finishDurations.length - 1] || null;
+  const medianDays = median(finishDurations.map(x => x.days));
+
+  // === Monthly finishes: last 18 months ===
+  const monthlyFinishes = [];
+  const cur = new Date();
+  cur.setDate(1);
+  for(let i = 17; i >= 0; i--){
+    const d = new Date(cur);
+    d.setMonth(d.getMonth() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    let count = 0;
+    books.forEach(b => {
+      if(b.status === 'finished' && b.dateFinished && b.dateFinished.startsWith(key)) count++;
+    });
+    monthlyFinishes.push({
+      key,
+      label: d.toLocaleDateString('en-US', {month:'short'}),
+      year: d.getFullYear(),
+      count,
+    });
+  }
+
+  // === Per-year totals ===
+  const perYear = {}; // year -> {finished, sessions}
+  books.forEach(b => {
+    if(b.dateFinished){
+      const y = b.dateFinished.slice(0,4);
+      if(!perYear[y]) perYear[y] = {finished:0, sessions:0};
+      perYear[y].finished++;
+    }
+    (b.sessions || []).forEach(s => {
+      if(!s.date) return;
+      const y = s.date.slice(0,4);
+      if(!perYear[y]) perYear[y] = {finished:0, sessions:0};
+      perYear[y].sessions++;
+    });
+  });
+
+  // === Most-read works (by session count) ===
+  const mostRead = books
+    .map(b => ({book: b, count: (b.sessions || []).length}))
+    .filter(x => x.count > 0)
+    .sort((a,b) => b.count - a.count)
+    .slice(0, 8);
+
+  // === Headline numbers ===
+  const totalSessions = [...sessionByDate.values()].reduce((a,c)=>a+c, 0);
+  const activeDaysTotal = activeDates.size;
+  const avgRating = ratings.length
+    ? (ratings.reduce((a,c)=>a+c, 0) / ratings.length)
+    : null;
+
+  return {
+    headline: {
+      total: books.length,
+      reading: statusCount.reading,
+      finished: statusCount.finished,
+      finishedYTD: monthlyFinishes
+        .filter(m => m.year === new Date().getFullYear())
+        .reduce((a,c) => a+c.count, 0),
+      want: statusCount.want,
+      currentStreak,
+      longestStreak,
+      activeDaysTotal,
+      totalSessions,
+      avgRating,
+      ratedCount: ratings.length,
+    },
+    sessionByDate, finishesByDate, dayOfWeek,
+    typeCount, statusCount, decadeCount, authorCount,
+    ratingHist, unrated,
+    finishDurations, fastest, longest, medianDays,
+    inProgress,
+    monthlyFinishes, perYear,
+    topStreaks, mostRead,
+  };
+}
+
+/* ----- chart renderers (return SVG strings) ----- */
+
+function renderHeatmap(sessionByDate, finishesByDate){
+  // 53-week grid, last 53 weeks ending this Saturday
+  const today = new Date(); today.setHours(0,0,0,0);
+  const dow = today.getDay();
+  // Last cell is today; layout has Sundays as the top row.
+  // Walk back to fill 53 weeks (371 days), aligned so today is last column.
+  const weeks = 53;
+  const cell = 13, gap = 3;
+  const padTop = 24, padLeft = 28;
+  const totalDays = weeks * 7;
+  const start = addDays(today, -(totalDays - 1));
+  // Shift start back to its containing Sunday
+  start.setDate(start.getDate() - start.getDay());
+  const cols = [];
+  let max = 0;
+  for(let w = 0; w < weeks; w++){
+    const col = [];
+    for(let d = 0; d < 7; d++){
+      const cd = addDays(start, w*7 + d);
+      if(cd > today){ col.push(null); continue; }
+      const k = dateKey(cd);
+      const n = (sessionByDate.get(k) || 0) + (finishesByDate.get(k) || 0);
+      const fin = finishesByDate.has(k);
+      col.push({date: cd, key: k, n, fin});
+      if(n > max) max = n;
+    }
+    cols.push(col);
+  }
+
+  // Color steps: 0 (empty), 1, 2, 3, 4+
+  const step = (n) => {
+    if(!n) return 0;
+    if(max <= 1) return 4;
+    const r = n / max;
+    if(r < 0.25) return 1;
+    if(r < 0.5)  return 2;
+    if(r < 0.75) return 3;
+    return 4;
+  };
+  const stepColor = ['rgba(212,165,116,0.06)', 'rgba(212,165,116,0.22)',
+                     'rgba(212,165,116,0.44)', 'rgba(212,165,116,0.70)',
+                     'rgba(212,165,116,1.00)'];
+
+  // Month labels: place above first column where the month changes.
+  const monthLabels = [];
+  let lastMonth = -1;
+  for(let w = 0; w < weeks; w++){
+    const firstCell = cols[w].find(c => c);
+    if(!firstCell) continue;
+    const m = firstCell.date.getMonth();
+    if(m !== lastMonth){
+      monthLabels.push({
+        x: padLeft + w*(cell+gap),
+        label: firstCell.date.toLocaleDateString('en-US', {month:'short'}),
+      });
+      lastMonth = m;
+    }
+  }
+
+  const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+
+  const w = padLeft + weeks*(cell+gap);
+  const h = padTop + 7*(cell+gap) + 4;
+
+  let cells = '';
+  cols.forEach((col, ci) => {
+    col.forEach((c, ri) => {
+      if(!c) return;
+      const x = padLeft + ci*(cell+gap);
+      const y = padTop + ri*(cell+gap);
+      const s = step(c.n);
+      const tip = `${c.date.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric', year:'numeric'})} — ${c.n} ${c.n===1?'entry':'entries'}${c.fin?' · finished':''}`;
+      cells += `<rect class="heatmap-cell" x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" fill="${stepColor[s]}" ${c.fin ? 'stroke="#9CB098" stroke-width="1"' : ''}><title>${escapeAttr(tip)}</title></rect>`;
+    });
+  });
+
+  let monthLabelsHtml = monthLabels.map(m =>
+    `<text class="heatmap-month" x="${m.x}" y="14">${m.label}</text>`).join('');
+  let dayLabelsHtml = dayLabels.map((d, i) =>
+    d ? `<text class="heatmap-day" x="0" y="${padTop + i*(cell+gap) + cell - 2}">${d}</text>` : ''
+  ).join('');
+
+  return `<div class="heatmap-wrap"><div class="heatmap">
+    <svg class="heatmap-svg" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+      ${monthLabelsHtml}
+      ${dayLabelsHtml}
+      ${cells}
+    </svg>
+  </div>
+  <div class="heatmap-legend">
+    <span>Less</span>
+    <div class="heatmap-scale">
+      ${[0,1,2,3,4].map(i => `<svg width="11" height="11"><rect width="11" height="11" rx="2" fill="${stepColor[i]}"/></svg>`).join('')}
+    </div>
+    <span>More</span>
+    <span style="margin-left:auto;color:var(--finished)">▢ Finished a book</span>
+  </div>
+  </div>`;
+}
+
+function renderBarChart(data, opts = {}){
+  // data: [{label, value, sublabel?, color?}]
+  const {height = 180, showValues = true, gridLines = 4} = opts;
+  if(!data.length) return '<div class="search-state">No data yet.</div>';
+  const maxV = Math.max(1, ...data.map(d => d.value));
+  const padTop = 18, padBottom = 32, padLeft = 24;
+  const innerH = height - padTop - padBottom;
+  const n = data.length;
+  // Compute width responsively based on n; SVG will scale via viewBox
+  const barW = 28, gap = 12;
+  const w = padLeft + n*(barW+gap);
+  // grid lines
+  let grid = '';
+  for(let i = 0; i <= gridLines; i++){
+    const y = padTop + (innerH * i / gridLines);
+    grid += `<line class="barchart-grid" x1="${padLeft}" y1="${y}" x2="${w}" y2="${y}" stroke-dasharray="${i===gridLines?'0':'2 3'}" opacity="${i===gridLines?'1':'0.4'}"/>`;
+  }
+  // bars
+  const bars = data.map((d, i) => {
+    const v = d.value;
+    const bh = (v / maxV) * innerH;
+    const x = padLeft + i*(barW+gap);
+    const y = padTop + (innerH - bh);
+    const color = d.color || 'var(--accent)';
+    const valueLabel = showValues && v > 0
+      ? `<text class="barchart-value" x="${x + barW/2}" y="${y - 4}" text-anchor="middle">${v}</text>`
+      : '';
+    return `${valueLabel}<rect class="barchart-bar" x="${x}" y="${y}" width="${barW}" height="${bh}" fill="${color}" rx="1"><title>${escapeAttr(d.label)}: ${v}${d.sublabel?' · '+d.sublabel:''}</title></rect>
+      <text class="barchart-axis-label" x="${x + barW/2}" y="${height - 16}" text-anchor="middle">${escapeAttr(d.label)}</text>
+      ${d.sublabel ? `<text class="barchart-axis-label" x="${x + barW/2}" y="${height - 4}" text-anchor="middle" opacity="0.6">${escapeAttr(d.sublabel)}</text>` : ''}`;
+  }).join('');
+
+  // y-axis max label
+  const yMax = `<text class="barchart-axis-label" x="${padLeft - 6}" y="${padTop + 4}" text-anchor="end">${maxV}</text>`;
+  const yMid = `<text class="barchart-axis-label" x="${padLeft - 6}" y="${padTop + innerH/2 + 4}" text-anchor="end">${Math.round(maxV/2)}</text>`;
+
+  return `<svg class="barchart" viewBox="0 0 ${w} ${height}" preserveAspectRatio="xMidYMin meet">${grid}${yMax}${yMid}${bars}</svg>`;
+}
+
+function renderDonut(items, centerLabel, centerSub){
+  // items: [{name, count, color}]
+  const total = items.reduce((a,c) => a + c.count, 0);
+  if(total === 0) return '<div class="search-state">No data yet.</div>';
+  const size = 180, r = 70, hole = 50;
+  const cx = size/2, cy = size/2;
+  let angle = -Math.PI/2; // start at top
+  const arcs = items.map(it => {
+    if(it.count === 0) return '';
+    const slice = (it.count / total) * Math.PI * 2;
+    const a0 = angle, a1 = angle + slice;
+    angle = a1;
+    const large = slice > Math.PI ? 1 : 0;
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const xh0 = cx + hole * Math.cos(a0), yh0 = cy + hole * Math.sin(a0);
+    const xh1 = cx + hole * Math.cos(a1), yh1 = cy + hole * Math.sin(a1);
+    const path = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xh1} ${yh1} A ${hole} ${hole} 0 ${large} 0 ${xh0} ${yh0} Z`;
+    return `<path d="${path}" fill="${it.color}" opacity="0.9"><title>${escapeAttr(it.name)}: ${it.count} (${Math.round(it.count/total*100)}%)</title></path>`;
+  }).join('');
+  const labelText = centerLabel != null ? `<text class="donut-label" x="${cx}" y="${cy + 2}">${escapeAttr(String(centerLabel))}</text>` : '';
+  const subText = centerSub ? `<text class="donut-sublabel" x="${cx}" y="${cy + 22}">${escapeAttr(centerSub)}</text>` : '';
+  return `<svg class="donut" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${arcs}${labelText}${subText}</svg>`;
+}
+
+function renderLegend(items, total){
+  return `<div class="legend">${items.map(it => `
+    <div class="legend-row">
+      <div class="legend-swatch" style="background:${it.color}"></div>
+      <div class="legend-name">${escapeHtml(it.name)}</div>
+      <div class="legend-count">${it.count}</div>
+      <div class="legend-pct">${total > 0 ? Math.round(it.count/total*100)+'%' : '—'}</div>
+    </div>`).join('')}</div>`;
+}
+
+function renderRanked(items, opts = {}){
+  // items: [{name, count, sublabel?, href?}]
+  if(!items.length) return '<div class="search-state">No data yet.</div>';
+  const maxV = Math.max(1, ...items.map(i => i.count));
+  return `<div class="ranked">${items.map((it, i) => `
+    <div class="ranked-row">
+      <div class="ranked-rank">${String(i+1).padStart(2,'0')}</div>
+      <div class="ranked-name">
+        <span class="ranked-text" title="${escapeAttr(it.name)}">${escapeHtml(it.name)}</span>
+        <div class="ranked-bar"><div class="ranked-bar-fill" style="width:${(it.count/maxV)*100}%"></div></div>
+      </div>
+      <div class="ranked-count">${it.count}</div>
+    </div>`).join('')}</div>`;
+}
+
+/* ----- main render ----- */
+function renderStatsView(){
+  const root = document.getElementById('statsView');
+  if(state.books.length === 0){
+    root.innerHTML = `<div class="stats-empty">
+      <h2>The chronicle begins with a single volume.</h2>
+      <p style="color:var(--text-3)">Add some books and log a few sessions, then this page will fill with charts.</p>
+    </div>`;
+    return;
+  }
+
+  const s = computeAdvancedStats();
+  const h = s.headline;
+
+  // === Headline metrics ===
+  const headline = `<div class="metric-row">
+    <div class="metric-cell">
+      <div class="metric-num"><em>${h.total}</em></div>
+      <div class="metric-label">Volumes</div>
+      <div class="metric-delta">${h.reading} reading · ${h.want} want · ${h.finished} finished</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">${h.totalSessions}</div>
+      <div class="metric-label">Total sessions</div>
+      <div class="metric-delta">across ${h.activeDaysTotal} active days</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">${h.currentStreak}<span class="unit">day${h.currentStreak===1?'':'s'}</span></div>
+      <div class="metric-label">Current streak</div>
+      <div class="metric-delta">best ever: ${h.longestStreak} day${h.longestStreak===1?'':'s'}</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">${h.avgRating ? h.avgRating.toFixed(2) : '—'}<span class="unit">${h.avgRating?'★':''}</span></div>
+      <div class="metric-label">Avg rating</div>
+      <div class="metric-delta">across ${h.ratedCount} rated book${h.ratedCount===1?'':'s'}</div>
+    </div>
+  </div>`;
+
+  // === Heatmap panel ===
+  const heatmap = `<div class="panel">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Activity — last 53 weeks</div>
+        <div class="panel-sub">Each cell is a day; intensity is the number of entries logged. Books finished are outlined.</div>
+      </div>
+    </div>
+    ${renderHeatmap(s.sessionByDate, s.finishesByDate)}
+  </div>`;
+
+  // === Type composition (donut + legend) ===
+  const typeItems = Object.keys(s.typeCount)
+    .map(name => ({name, count: s.typeCount[name], color: colorForType(name)}))
+    .sort((a,b) => b.count - a.count);
+  const typeTotal = typeItems.reduce((a,c) => a+c.count, 0);
+  const typePanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div class="panel-title">By type</div>
+    </div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center">
+      ${renderDonut(typeItems, typeTotal, 'volumes')}
+      ${renderLegend(typeItems, typeTotal)}
+    </div>
+  </div>`;
+
+  // === Status composition ===
+  const statusItems = [
+    {name:'Want to read',  count:s.statusCount.want,     color:'#8DA8C7'},
+    {name:'Currently reading', count:s.statusCount.reading, color:'#E0B97D'},
+    {name:'Finished',      count:s.statusCount.finished, color:'#9CB098'},
+  ];
+  const statusTotal = statusItems.reduce((a,c) => a+c.count, 0);
+  const statusPanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div class="panel-title">By status</div>
+    </div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center">
+      ${renderDonut(statusItems, statusTotal, 'volumes')}
+      ${renderLegend(statusItems, statusTotal)}
+    </div>
+  </div>`;
+
+  // === Monthly finishes (last 18 months) ===
+  // Mark January with the year subscript
+  const monthlyData = s.monthlyFinishes.map((m, i, arr) => {
+    const isJan = m.label === 'Jan' || (i === 0);
+    return {
+      label: m.label,
+      value: m.count,
+      sublabel: isJan ? `'${String(m.year).slice(-2)}` : null,
+      color: m.year === new Date().getFullYear() ? 'var(--accent)' : 'var(--accent-dim)',
+    };
+  });
+  const monthlyPanel = `<div class="panel panel-8">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Books finished — last 18 months</div>
+        <div class="panel-sub">${s.monthlyFinishes.reduce((a,c)=>a+c.count,0)} total finishes shown</div>
+      </div>
+    </div>
+    ${renderBarChart(monthlyData, {height: 200})}
+  </div>`;
+
+  // === Day of week ===
+  const dowLabels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const dowData = s.dayOfWeek.map((c, i) => ({
+    label: dowLabels[i],
+    value: c,
+    color: c === Math.max(...s.dayOfWeek) && c > 0 ? 'var(--accent)' : 'var(--accent-dim)',
+  }));
+  const dowPanel = `<div class="panel panel-4">
+    <div class="panel-head">
+      <div class="panel-title">Day of week</div>
+    </div>
+    ${renderBarChart(dowData, {height: 200, showValues: false})}
+  </div>`;
+
+  // === Rating histogram ===
+  const ratingData = [1,2,3,4,5].map(r => ({
+    label: '★'.repeat(r),
+    value: s.ratingHist[r-1],
+    color: 'var(--accent)',
+  }));
+  const ratingPanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Rating distribution</div>
+        <div class="panel-sub">${s.unrated} finished book${s.unrated===1?'':'s'} unrated</div>
+      </div>
+    </div>
+    ${renderBarChart(ratingData, {height: 180})}
+  </div>`;
+
+  // === Decade distribution ===
+  const decades = Object.keys(s.decadeCount)
+    .map(d => parseInt(d))
+    .sort((a,b) => a-b);
+  let decadeData = [];
+  if(decades.length){
+    const minDec = decades[0];
+    const maxDec = decades[decades.length-1];
+    for(let d = minDec; d <= maxDec; d += 10){
+      decadeData.push({
+        label: `${d}s`,
+        value: s.decadeCount[d] || 0,
+        color: 'var(--accent-dim)',
+      });
+    }
+  }
+  const decadePanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">By publication decade</div>
+        <div class="panel-sub">${decades.length} distinct decade${decades.length===1?'':'s'} represented</div>
+      </div>
+    </div>
+    ${decadeData.length ? renderBarChart(decadeData, {height:180}) : '<div class="search-state">No publication years recorded yet.</div>'}
+  </div>`;
+
+  // === Top authors ===
+  const topAuthors = Object.keys(s.authorCount)
+    .map(name => ({name, count: s.authorCount[name]}))
+    .sort((a,b) => b.count - a.count)
+    .slice(0, 10);
+  const authorsPanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Top authors</div>
+        <div class="panel-sub">${Object.keys(s.authorCount).length} unique author${Object.keys(s.authorCount).length===1?'':'s'} in library</div>
+      </div>
+    </div>
+    ${renderRanked(topAuthors)}
+  </div>`;
+
+  // === Pace stats ===
+  const paceCells = [];
+  if(s.medianDays != null){
+    paceCells.push({n: s.medianDays, label: 'median days'});
+    paceCells.push({n: s.fastest.days, label: 'fastest', sub: s.fastest.book.title});
+    paceCells.push({n: s.longest.days, label: 'longest', sub: s.longest.book.title});
+  }
+  const inProgressList = s.inProgress.slice(0, 8);
+  const pacePanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Reading pace</div>
+        <div class="panel-sub">${s.finishDurations.length} finishes with full date data</div>
+      </div>
+    </div>
+    ${paceCells.length ? `<div class="pace-grid">
+      ${paceCells.map(c => `<div class="pace-cell">
+        <div class="pace-num">${c.n}d</div>
+        <div class="pace-label">${c.label}</div>
+        ${c.sub ? `<div class="metric-delta" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${escapeAttr(c.sub)}">${escapeHtml(c.sub)}</div>` : ''}
+      </div>`).join('')}
+    </div>` : '<div class="search-state" style="padding:20px 0">No completed books with start+finish dates yet.</div>'}
+    ${inProgressList.length ? `
+      <div style="margin-top:8px">
+        <div class="panel-title" style="margin-bottom:10px;border-top:1px solid var(--border);padding-top:14px">Currently reading — ${s.inProgress.length}</div>
+        <div class="inprogress-list">
+          ${inProgressList.map(p => {
+            const cls = p.days > 60 ? 'cold' : (p.days <= 14 ? 'warm' : '');
+            return `<div class="inprogress-row">
+              <div class="inprogress-title" title="${escapeAttr(p.book.title)}">${escapeHtml(p.book.title)}</div>
+              <div class="inprogress-meta ${cls}">${p.days}d open</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>` : ''}
+  </div>`;
+
+  // === Most-read works ===
+  const mostReadPanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Most-logged works</div>
+        <div class="panel-sub">By number of reading sessions</div>
+      </div>
+    </div>
+    ${renderRanked(s.mostRead.map(x => ({name: x.book.title, count: x.count})))}
+  </div>`;
+
+  // === Streak history ===
+  const streaksPanel = `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Longest streaks</div>
+        <div class="panel-sub">Top 5 consecutive-day reading runs</div>
+      </div>
+    </div>
+    ${s.topStreaks.length ? `<div class="ranked">
+      ${s.topStreaks.map((st, i) => `<div class="ranked-row">
+        <div class="ranked-rank">${String(i+1).padStart(2,'0')}</div>
+        <div class="ranked-name">
+          <span class="ranked-text">${st.start === st.end ? st.start : st.start + ' → ' + st.end}</span>
+          <div class="ranked-bar"><div class="ranked-bar-fill" style="width:${(st.length/s.topStreaks[0].length)*100}%"></div></div>
+        </div>
+        <div class="ranked-count">${st.length}d</div>
+      </div>`).join('')}
+    </div>` : '<div class="search-state">No streaks yet.</div>'}
+  </div>`;
+
+  // === Year totals ===
+  const years = Object.keys(s.perYear).sort();
+  const yearData = years.slice(-10).map(y => ({
+    label: y.slice(-2),
+    sublabel: '',
+    value: s.perYear[y].finished,
+    color: 'var(--accent-dim)',
+  }));
+  const yearPanel = years.length ? `<div class="panel panel-6">
+    <div class="panel-head">
+      <div>
+        <div class="panel-title">Books finished per year</div>
+        <div class="panel-sub">${years[0]} – ${years[years.length-1]}</div>
+      </div>
+    </div>
+    ${renderBarChart(yearData, {height:180})}
+  </div>` : '';
+
+  root.innerHTML = `
+    <div class="panel" style="padding:0;overflow:hidden">${headline}</div>
+    ${heatmap}
+    <div class="stats-grid">
+      ${monthlyPanel}
+      ${dowPanel}
+      ${typePanel}
+      ${statusPanel}
+      ${pacePanel}
+      ${ratingPanel}
+      ${authorsPanel}
+      ${mostReadPanel}
+      ${decadePanel}
+      ${streaksPanel}
+      ${yearPanel}
+    </div>
+  `;
 }
 
 /* ============================================================

@@ -10,7 +10,7 @@
  * Bump VERSION to invalidate every old cache and re-fetch the shell.
  */
 
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.1.0';
 const SHELL_CACHE = `library-shell-${VERSION}`;
 const RUNTIME_CACHE = `library-runtime-${VERSION}`;
 
